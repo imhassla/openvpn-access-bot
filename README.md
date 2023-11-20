@@ -24,7 +24,9 @@ pip install -r requirements.txt
 ```
 
 Replace 'TOKEN' and 'admin_ids' in openvpn-access-bot.py script with your data and run it after:
-- `screen python3 openvpn-access-bot.py`
+```bash
+screen python3 openvpn-access-bot.py
+```
   
 Functions:
 ![alt text](https://github.com/imhassla/openvpn-access-bot/blob/main/img/demo1.png)
