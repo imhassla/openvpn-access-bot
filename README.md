@@ -3,7 +3,7 @@ Manage your openvpn server via telegram-bot. Create/Revoke clients, watch server
 
 ## Install
 python3-full and python3-pip required:
-```bash
+```sh
 sudo apt update
 sudo apt install git python3-full python3-pip -y
 ```
