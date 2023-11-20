@@ -4,7 +4,7 @@ Manage your openvpn server via telegram-bot. Create/Revoke clients, watch server
 ## Install
 python3-full and python3-pip required:
 ```bash
-sudo apt update && sudo apt install git python3-full python3-pip -y
+sudo apt update && sudo apt install git screen python3-full python3-pip -y
 ```
 
 prepare openvpn server first, get the script, make it executable and run as sudo:
