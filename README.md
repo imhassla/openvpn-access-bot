@@ -9,9 +9,7 @@ sudo apt update && sudo apt install git python3-full python3-pip -y
 
 prepare openvpn server first, get the script, make it executable and run as sudo:
 ```bash
-curl -O https://raw.githubusercontent.com/angristan/openvpn-install/master/openvpn-install.sh
-chmod +x openvpn-install.sh
-sudo bash openvpn-install.sh
+curl -O https://raw.githubusercontent.com/angristan/openvpn-install/master/openvpn-install.sh && chmod +x openvpn-install.sh && sudo bash openvpn-install.sh
 ```
 
 You need to run the script as root and have the TUN module enabled, you'll have to follow the assistant and answer a few questions to setup your VPN server.
