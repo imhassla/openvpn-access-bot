@@ -32,3 +32,11 @@ Clone repo and install dependencies:
 Replace 'TOKEN' and 'admin_ids' with your data.
 - `screen python3 openvpn-access-bot.py`
   
+Functions:
+![alt text](https://github.com/imhassla/openvpn-access-bot/blob/main/img/demo1.png)
+
+![alt text](https://github.com/imhassla/openvpn-access-bot/blob/main/img/demo2.png)
+
+![alt text](https://github.com/imhassla/openvpn-access-bot/blob/main/img/demo3.png)
+
+![alt text](https://github.com/imhassla/openvpn-access-bot/blob/main/img/demo4.png)
