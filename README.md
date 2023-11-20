@@ -29,7 +29,7 @@ Clone repo and install dependencies:
 - `source env/bin/activate`
 - `pip install -r requirements.txt`
 
-Replace 'TOKEN' and 'admin_ids' with your data.
+Replace 'TOKEN' and 'admin_ids' in openvpn-access-bot.py script with your data and run it after:
 - `screen python3 openvpn-access-bot.py`
   
 Functions:
