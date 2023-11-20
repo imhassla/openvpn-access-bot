@@ -2,7 +2,7 @@
 Manage your openvpn server via telegram-bot. Create/Revoke clients, watch server stats and more.
 
 ## Install
-Install python3-full and python3-pip:
+python3-full and python3-pip required:
 - ```sudo apt update```
 - ```sudo apt install python3-full```
 - ```sudo apt install python3-pip```
@@ -20,9 +20,7 @@ Then run it:
 ./openvpn-install.sh
 ```
 
-You need to run the script as root and have the TUN module enabled.
-
-The first time you run it, you'll have to follow the assistant and answer a few questions to setup your VPN server.
+You need to run the script as root and have the TUN module enabled, you'll have to follow the assistant and answer a few questions to setup your VPN server.
 
 Clone repo and install dependencies:
 - `git clone https://github.com/imhassla/openvpn-access-bot.git`
@@ -30,4 +28,7 @@ Clone repo and install dependencies:
 - `python3 -m venv env`
 - `source env/bin/activate`
 - `pip install -r requirements.txt`
+
+Replace 'TOKEN' and 'admin_ids' with your data.
+- `screen python3 openvpn-access-bot.py`
   
