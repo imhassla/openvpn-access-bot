@@ -23,7 +23,12 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
-Replace 'TOKEN' and 'admin_ids' in openvpn-access-bot.py script with your data and run it after:
+Create a file called .env  and add your TOKEN and  ADMIN_IDS variables to this file:
+```bash
+echo 'TOKEN=bot_token' > .env
+echo 'ADMIN_IDS=1145151,2145153' >> .env
+```
+run:
 ```bash
 screen python3 openvpn-access-bot.py
 ```
