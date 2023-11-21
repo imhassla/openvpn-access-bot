@@ -31,6 +31,14 @@ def vpn_log():
 def restart_vpn():
     os.system('sudo systemctl restart openvpn@server')
 
+def admin_required(func):
+    def wrapper(message):
+        if str(message.chat.id) not in ADMIN_IDS:
+            bot.reply_to(message, "You do not have permission to execute this command.")
+            return
+        return func(message)
+    return wrapper
+
 def c2c_status():
     
     with open_as_sudo('/etc/openvpn/server.conf') as file:
@@ -181,17 +189,13 @@ commands = [
 bot.set_my_commands(commands)
 
 @bot.message_handler(commands=['start'])
+#@admin_required
 def start(message):
-    if str(message.chat.id) not in ADMIN_IDS:
-        bot.reply_to(message, "You do not have permission to execute this command.")
-        return
     bot.send_message(message.chat.id, "Welcone to openvpn-access-bot!\nYou can see a list of available commands in the menu")
 
 @bot.message_handler(commands=['new'])
+@admin_required
 def new_user(message):
-    if str(message.chat.id) not in ADMIN_IDS:
-        bot.reply_to(message, "You do not have permission to execute this command.")
-        return
     os.chdir(script_dir)
     msg = bot.reply_to(message, "Enter new user name in format [a-zA-Z0-9]:")
     bot.register_next_step_handler(msg, create_new_user)
@@ -212,10 +216,8 @@ def create_new_user(message):
         bot.send_document(message.chat.id, open(f'{name}.ovpn', 'rb'))
 
 @bot.message_handler(commands=['revoke'])
+@admin_required
 def revoke_user(message):
-    if str(message.chat.id) not in ADMIN_IDS:
-        bot.reply_to(message, "You do not have permission to execute this command.")
-        return
     os.chdir(script_dir)
     users = [os.path.splitext(os.path.basename(file))[0] for file in glob.glob('*.ovpn')]
     bot.reply_to(message, "Users list:\n" + '\n'.join(users))
@@ -234,12 +236,9 @@ def revoke_process(message):
         bot.reply_to(message, "User deleted.")
 
 @bot.message_handler(commands=['c2c'])
+@admin_required
 def c2c_traffic(message):
-    if str(message.chat.id) not in ADMIN_IDS:
-        bot.reply_to(message, "You do not have permission to execute this command.")
-        return
     status = c2c_status()
-
     markup = types.InlineKeyboardMarkup()
     itembtn1 = types.InlineKeyboardButton('Enable' if status == 'disabled' else 'Disable', callback_data='change_c2c_status')
     markup.add(itembtn1)
@@ -255,10 +254,8 @@ def change_c2c_status(call):
     bot.delete_message(call.message.chat.id, call.message.message_id)
 
 @bot.message_handler(commands=['restart'])
+@admin_required
 def restart_server(message):
-    if str(message.chat.id) not in ADMIN_IDS:
-        bot.reply_to(message, "You do not have permission to execute this command.")
-        return
     markup = types.InlineKeyboardMarkup()
     itembtn1 = types.InlineKeyboardButton('Restart vpn server', callback_data='restart')
     markup.add(itembtn1)
@@ -271,10 +268,8 @@ def restart(call):
 
 
 @bot.message_handler(commands=['info'])
+@admin_required
 def server_stat(message):
-    if str(message.chat.id) not in ADMIN_IDS:
-        bot.reply_to(message, "You do not have permission to execute this command.")
-        return
     os.chdir(script_dir)
     # Getting CPU information
     cpu_usage = psutil.cpu_percent(interval=1)
