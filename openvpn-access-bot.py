@@ -10,13 +10,14 @@ import subprocess
 import glob
 from datetime import datetime
 from telebot import types
+import dotenv
 
-TOKEN = 'token' # Replace with your bot_token
-admin_ids = ['1234567']  # Replace with administrator IDs
-
+dotenv.load_dotenv()
+TOKEN = os.getenv('TOKEN')
+ADMIN_IDS = os.getenv('ADMIN_IDS')
+ 
 bot = telebot.TeleBot(TOKEN)
 script_dir = os.path.dirname(os.path.abspath(__file__))
-
 
 def open_as_sudo(path):
     return os.popen(f'sudo cat {path}', 'r')
@@ -181,14 +182,14 @@ bot.set_my_commands(commands)
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    if str(message.chat.id) not in admin_ids:
+    if str(message.chat.id) not in ADMIN_IDS:
         bot.reply_to(message, "You do not have permission to execute this command.")
         return
     bot.send_message(message.chat.id, "Welcone to openvpn-access-bot!\nYou can see a list of available commands in the menu")
 
 @bot.message_handler(commands=['new'])
 def new_user(message):
-    if str(message.chat.id) not in admin_ids:
+    if str(message.chat.id) not in ADMIN_IDS:
         bot.reply_to(message, "You do not have permission to execute this command.")
         return
     os.chdir(script_dir)
@@ -212,7 +213,7 @@ def create_new_user(message):
 
 @bot.message_handler(commands=['revoke'])
 def revoke_user(message):
-    if str(message.chat.id) not in admin_ids:
+    if str(message.chat.id) not in ADMIN_IDS:
         bot.reply_to(message, "You do not have permission to execute this command.")
         return
     os.chdir(script_dir)
@@ -234,7 +235,7 @@ def revoke_process(message):
 
 @bot.message_handler(commands=['c2c'])
 def c2c_traffic(message):
-    if str(message.chat.id) not in admin_ids:
+    if str(message.chat.id) not in ADMIN_IDS:
         bot.reply_to(message, "You do not have permission to execute this command.")
         return
     status = c2c_status()
@@ -255,7 +256,7 @@ def change_c2c_status(call):
 
 @bot.message_handler(commands=['restart'])
 def restart_server(message):
-    if str(message.chat.id) not in admin_ids:
+    if str(message.chat.id) not in ADMIN_IDS:
         bot.reply_to(message, "You do not have permission to execute this command.")
         return
     markup = types.InlineKeyboardMarkup()
@@ -271,7 +272,7 @@ def restart(call):
 
 @bot.message_handler(commands=['info'])
 def server_stat(message):
-    if str(message.chat.id) not in admin_ids:
+    if str(message.chat.id) not in ADMIN_IDS:
         bot.reply_to(message, "You do not have permission to execute this command.")
         return
     os.chdir(script_dir)
